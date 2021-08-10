@@ -1,0 +1,64 @@
+
+index_850 = 1;
+
+run;
+
+P = getresult("Fieldxz" , "P");
+x = P.x;
+y = P.y;
+z = P.z;
+lambda = P.lambda;
+pmag = sqrt(real(P.P2));
+p_850 = pinch(pmag,4,index_850);
+p_850 = pinch(p_850);
+
+E1 = getresult("Fieldxz", "E");
+    y1 = E1.lambda; 
+    emag = sqrt(real(E1.E2));
+x = E1.x;
+y = E1.y;
+z = E1.z;
+
+n=1;
+for (i=1:length(x) ) {
+    for (j=1:length(z) ) {
+ str = num2str(x(i))+", "+num2str(z(j))+", "+num2str(p_850(n));
+ n = n+1;
+ write("NaSi_fab_nogap_P_xz_0deg.txt",str);
+}
+}
+
+# P
+
+index_850 = 1;
+
+switchtolayout;
+select("::model");
+set("theta", 45);
+
+run;
+
+P = getresult("Fieldxz" , "P");
+x = P.x;
+y = P.y;
+z = P.z;
+lambda = P.lambda;
+pmag = sqrt(real(P.P2));
+p_850 = pinch(pmag,4,index_850);
+p_850 = pinch(p_850);
+
+E1 = getresult("Fieldxz", "E");
+    y1 = E1.lambda; 
+    emag = sqrt(real(E1.E2));
+x = E1.x;
+y = E1.y;
+z = E1.z;
+
+n=1;
+for (i=1:length(x) ) {
+    for (j=1:length(z) ) {
+ str = num2str(x(i))+", "+num2str(z(j))+", "+num2str(p_850(n));
+ n = n+1;
+ write("NaSi_fab_nogap_P_xz_45deg.txt",str);
+}
+}

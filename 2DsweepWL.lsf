@@ -1,0 +1,52 @@
+uc_1 = 500e-9;
+
+
+index_850 = 1;
+No_points_sweep = 50;
+w_min = 100e-9;
+w_max = 400e-9;
+l_min = 100e-9;
+l_max = 400e-9;
+No_points_sweep_l = 50;
+# Sweep over angle
+#rm("pec_rect_sw_unitcell_checkresonance.txt");
+w = w_min;
+l = l_min;
+w_inc = (w_max - w_min) / No_points_sweep;
+l_inc = (l_max - l_min) / No_points_sweep_l;
+
+for(i=1:No_points_sweep){
+  w = w_min;
+  for(i=1:No_points_sweep){
+    switchtolayout;
+    select("::model");
+
+    set("x_width",w);
+    set("y_length",l);
+
+    run;
+    
+    E1 = getresult("R", "E");
+    y1 = E1.lambda; 
+    Ex = E1.getattribute("Ex");
+    Xph = angle(Ex);
+    Ey = E1.getattribute("Ey");
+    Yph = angle(Ey);
+    ph_diff = abs(Xph - Yph);
+    R = getresult("field_far","T");
+    R = R.T;
+    T = getresult("field_below","T");
+    T = T.T;
+
+    
+    for (i=1:length(y1)){
+    str = num2str(w)+", "+num2str(l)+", "+num2str(R(i))+", "+num2str(T(i))+", "+num2str(Ex(i))+", "+num2str(Ey(i))+", "+num2str(ph_diff(i));
+    write("SiN_WL_silver_U500.txt",str);
+    }
+    w = w + w_inc;
+  }
+  l = l + l_inc;
+}
+
+
+

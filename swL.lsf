@@ -1,0 +1,165 @@
+# SWEEP OVER ANGLE
+
+index_850 = 1;
+No_points_sweep = 60;
+range_min = 485e-9;
+range_max = 515e-9;
+
+
+# Sweep over angle
+#rm("pec_rect_sw_unitcell_checkresonance.txt");
+theta = range_min;
+inc = (range_max - range_min) / No_points_sweep;
+
+for(i=1:No_points_sweep){
+    switchtolayout;
+    select("::model");
+    set("height",theta);
+  #  set("index" , 2);
+    
+    run;
+    
+    E1 = getresult("R", "E");
+    y1 = E1.lambda; 
+    Ex = E1.getattribute("Ex");
+    Xph = angle(Ex);
+    Ey = E1.getattribute("Ey");
+    Yph = angle(Ey);
+    ph_diff = abs(Xph - Yph);
+    R = getresult("field_far","T");
+    R = R.T;
+    T = getresult("field_below","T");
+    T = T.T;
+
+    for (i=1:length(y1)){
+    str = num2str(theta)+", "+num2str(y1(i))+", "+num2str(R(i))+", "+num2str(T(i))+", "+num2str(Ex(i))+", "+num2str(Ey(i))+", "+num2str(ph_diff(i));
+    write("NaSi_des_swH.txt",str);
+    }
+    
+    theta = theta + inc;
+}
+
+kk
+
+index_850 = 1;
+No_points_sweep = 300;
+range_min = 100e-9;
+range_max = 400e-9;
+
+
+# Sweep over angle
+#rm("pec_rect_sw_unitcell_checkresonance.txt");
+theta = range_min;
+inc = (range_max - range_min) / No_points_sweep;
+
+for(i=1:No_points_sweep){
+    switchtolayout;
+    select("::model");
+    set("index", 2.4);
+    set("y_length",theta);
+
+    run;
+    
+    E1 = getresult("R", "E");
+    y1 = E1.lambda; 
+    Ex = E1.getattribute("Ex");
+    Xph = angle(Ex);
+    Ey = E1.getattribute("Ey");
+    Yph = angle(Ey);
+    ph_diff = abs(Xph - Yph);
+    R = getresult("field_far","T");
+    R = R.T;
+    T = getresult("field_below","T");
+    T = T.T;
+
+    for (i=1:length(y1)){
+    str = num2str(theta)+", "+num2str(y1(i))+", "+num2str(R(i))+", "+num2str(T(i))+", "+num2str(Ex(i))+", "+num2str(Ey(i))+", "+num2str(ph_diff(i));
+    write("index_2.4_swL.txt",str);
+    }
+    
+    theta = theta + inc;
+}
+
+
+
+index_850 = 1;
+No_points_sweep = 300;
+range_min = 100e-9;
+range_max = 400e-9;
+
+
+# Sweep over angle
+#rm("pec_rect_sw_unitcell_checkresonance.txt");
+theta = range_min;
+inc = (range_max - range_min) / No_points_sweep;
+
+for(i=1:No_points_sweep){
+    switchtolayout;
+    select("::model");
+    set("y_length",theta);
+    set("index", 2.8);
+
+    run;
+    
+    E1 = getresult("R", "E");
+    y1 = E1.lambda; 
+    Ex = E1.getattribute("Ex");
+    Xph = angle(Ex);
+    Ey = E1.getattribute("Ey");
+    Yph = angle(Ey);
+    ph_diff = abs(Xph - Yph);
+    R = getresult("field_far","T");
+    R = R.T;
+    T = getresult("field_below","T");
+    T = T.T;
+
+    for (i=1:length(y1)){
+    str = num2str(theta)+", "+num2str(y1(i))+", "+num2str(R(i))+", "+num2str(T(i))+", "+num2str(Ex(i))+", "+num2str(Ey(i))+", "+num2str(ph_diff(i));
+    write("index_2.8_swL.txt",str);
+    }
+    
+    theta = theta + inc;
+}
+
+
+
+index_850 = 1;
+No_points_sweep = 300;
+range_min = 100e-9;
+range_max = 400e-9;
+
+
+# Sweep over angle
+#rm("pec_rect_sw_unitcell_checkresonance.txt");
+theta = range_min;
+inc = (range_max - range_min) / No_points_sweep;
+
+for(i=1:No_points_sweep){
+    switchtolayout;
+    select("::model");
+    set("y_length",theta);
+    set("index" , 3.2);
+
+    run;
+    
+    E1 = getresult("R", "E");
+    y1 = E1.lambda; 
+    Ex = E1.getattribute("Ex");
+    Xph = angle(Ex);
+    Ey = E1.getattribute("Ey");
+    Yph = angle(Ey);
+    ph_diff = abs(Xph - Yph);
+    R = getresult("field_far","T");
+    R = R.T;
+    T = getresult("field_below","T");
+    T = T.T;
+
+    for (i=1:length(y1)){
+    str = num2str(theta)+", "+num2str(y1(i))+", "+num2str(R(i))+", "+num2str(T(i))+", "+num2str(Ex(i))+", "+num2str(Ey(i))+", "+num2str(ph_diff(i));
+    write("index_3.2_swL.txt",str);
+    }
+    
+    theta = theta + inc;
+}
+
+

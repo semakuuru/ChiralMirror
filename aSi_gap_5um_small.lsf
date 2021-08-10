@@ -1,0 +1,42 @@
+index_850 = 1;
+
+mirror_span = 15e-6;
+D = 15e-6;
+pixel_max = (D/mirror_span)*(D/mirror_span);
+
+switchtolayout;
+
+
+for (p = 1:pixel_max){
+    switchtolayout;
+    #setnamed("::model","pixel" , p);
+    pixel_p = p;
+    run;
+    
+    E = getresult("field_near" , "E");
+    x = E.x;
+    y = E.y;
+    z = E.z;
+    lambda = E.lambda;
+    E_ = E.E;
+    E_mag = pinch(sqrt(E.E2), 4,index_850);
+    Ex = pinch(E.Ex , 4, index_850);
+    Ey = pinch(E.Ey , 4, index_850);
+    Ez = pinch(E.Ez , 4, index_850);
+    R1 = getresult("field_near" , "T");
+    Rnear = R1.T;
+    T1 = getresult("field_below" , "T");
+    T = T1.T;
+
+    #R1 = getresult("field_far" , "T");
+    #Rfar = R1.T;
+
+    n = 1;
+    for (i=1:length(x) ) {
+        for (j=1:length(y) ) {
+    str = num2str(x(i))+", "+num2str(y(j))+", "+num2str(Ex(n))+", "+num2str(Ey(n))+", "+num2str(Ez(n))+", "+num2str(Rnear)+", "+num2str(T);
+    n = n+1;
+    filename = "NaSi_fab_spacer_halfwavelength_15um_f30_E_all_xy_pixel"+num2str(p)+".txt";
+    write(filename,str);
+    # field near located at z = 700nm
+    }}}
